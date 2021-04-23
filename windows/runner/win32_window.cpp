@@ -8,19 +8,19 @@ namespace {
 
 constexpr const wchar_t kWindowClassName[] = L"FLUTTER_RUNNER_WIN32_WINDOW";
 
-// The number of Win32Window objects that currently exist.
+
 static int g_active_window_count = 0;
 
 using EnableNonClientDpiScaling = BOOL __stdcall(HWND hwnd);
 
-// Scale helper to convert logical scaler values to physical using passed in
-// scale factor
+
+
 int Scale(int source, double scale_factor) {
   return static_cast<int>(source * scale_factor);
 }
 
-// Dynamically loads the |EnableNonClientDpiScaling| from the User32 module.
-// This API is only needed for PerMonitor V1 awareness mode.
+
+
 void EnableFullDpiSupportIfAvailable(HWND hwnd) {
   HMODULE user32_module = LoadLibraryA("User32.dll");
   if (!user32_module) {
@@ -35,14 +35,14 @@ void EnableFullDpiSupportIfAvailable(HWND hwnd) {
   }
 }
 
-}  // namespace
+}  
 
-// Manages the Win32Window's window class registration.
+
 class WindowClassRegistrar {
  public:
   ~WindowClassRegistrar() = default;
 
-  // Returns the singleton registar instance.
+  
   static WindowClassRegistrar* GetInstance() {
     if (!instance_) {
       instance_ = new WindowClassRegistrar();
@@ -50,12 +50,12 @@ class WindowClassRegistrar {
     return instance_;
   }
 
-  // Returns the name of the window class, registering the class if it hasn't
-  // previously been registered.
+  
+  
   const wchar_t* GetWindowClass();
 
-  // Unregisters the window class. Should only be called if there are no
-  // instances of the window.
+  
+  
   void UnregisterWindowClass();
 
  private:
@@ -129,7 +129,7 @@ bool Win32Window::CreateAndShow(const std::wstring& title,
   return OnCreate();
 }
 
-// static
+
 LRESULT CALLBACK Win32Window::WndProc(HWND const window,
                                       UINT const message,
                                       WPARAM const wparam,
@@ -176,7 +176,7 @@ Win32Window::MessageHandler(HWND hwnd,
     case WM_SIZE: {
       RECT rect = GetClientArea();
       if (child_content_ != nullptr) {
-        // Size and position the child window.
+        
         MoveWindow(child_content_, rect.left, rect.top, rect.right - rect.left,
                    rect.bottom - rect.top, TRUE);
       }
@@ -236,10 +236,10 @@ void Win32Window::SetQuitOnClose(bool quit_on_close) {
 }
 
 bool Win32Window::OnCreate() {
-  // No-op; provided for subclasses.
+  
   return true;
 }
 
 void Win32Window::OnDestroy() {
-  // No-op; provided for subclasses.
+  
 }
