@@ -1,11 +1,11 @@
-import 'package:example/app//challenge/widget/quiz/quiz_widget.dart';
+import 'package:example/app//result/result_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_modular_test/flutter_modular_test.dart';
 
 main() {
-  group('QuizWidget', () {
+  group('ResultPage', () {
     testWidgets('has a title and message', (WidgetTester tester) async {
-      await tester.pumpWidget(buildTestableWidget(QuizWidget(title: 'T')));
+      await tester.pumpWidget(buildTestableWidget(ResultPage(title: 'T')));
       final titleFinder = find.text('T');
       expect(titleFinder, findsOneWidget);
     });

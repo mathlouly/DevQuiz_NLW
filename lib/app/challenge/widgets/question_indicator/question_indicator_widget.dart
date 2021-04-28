@@ -3,24 +3,28 @@ import 'package:example/shared/widgets/progress_indicator/progress_indicator_wid
 import 'package:flutter/material.dart';
 
 class QuestionIndicatorWidget extends StatelessWidget {
-  final String title;
-  const QuestionIndicatorWidget({Key? key, this.title = "QuestionIndicatorWidget"}) : super(key: key);
+  final int currentPage;
+  final int length;
+  const QuestionIndicatorWidget({Key? key, required this.currentPage, required this.length}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 24,
+        vertical: 10,
+      ),
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Questão 04", style: AppTextStyles.body),
-              Text("4 de 10", style: AppTextStyles.body),
+              Text("Questão $currentPage", style: AppTextStyles.body),
+              Text("$currentPage de $length", style: AppTextStyles.body),
             ],
           ),
           SizedBox(height: 16),
-          ProgressIndicatorWidget(value: 0.4),
+          ProgressIndicatorWidget(value: currentPage / length),
         ],
       ),
     );
